@@ -14,6 +14,7 @@ gem "bootsnap", require: false
 gem "bourbon", ">= 5.0.1"
 gem "delayed_job_active_record"
 gem "faraday"
+gem "fast_jsonapi"
 gem "figaro"
 gem "high_voltage"
 gem "neat", ">= 3.0.1"
@@ -31,6 +32,7 @@ gem "title"
 gem "typhoeus"
 gem "tzinfo-data", platforms: %i[mingw x64_mingw mswin jruby]
 gem "uglifier"
+gem "webpacker"
 
 group :development do
   gem "bummr", require: false
