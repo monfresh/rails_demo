@@ -29,7 +29,9 @@ RSpec.configure do |config|
   config.order = :random
 end
 
-WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(
+  allow: [/localhost/, /127\.0\.0\.1/, /codeclimate.com/, /chromedriver.storage.googleapis.com/]
+)
 
 # Only allow Timecop with block syntax
 Timecop.safe_mode = true
