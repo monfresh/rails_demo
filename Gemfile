@@ -13,6 +13,7 @@ gem "autoprefixer-rails"
 gem "bootsnap", require: false
 gem "bourbon", ">= 5.0.1"
 gem "delayed_job_active_record"
+gem "faraday"
 gem "figaro"
 gem "high_voltage"
 gem "neat", ">= 3.0.1"
@@ -27,6 +28,7 @@ gem "sassc-rails"
 gem "simple_form"
 gem "sprockets", ">= 3.0.0"
 gem "title"
+gem "typhoeus"
 gem "tzinfo-data", platforms: %i[mingw x64_mingw mswin jruby]
 gem "uglifier"
 
