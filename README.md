@@ -5,14 +5,17 @@
 After you have cloned this repo, run this setup script to set up your machine
 with the necessary dependencies to run and test this app:
 
-    % ./bin/setup
-
-Install foreman locally
-    % gem install foreman
-
 Run Postgres
 
     % brew services start postgres
+
+Setup the app
+
+    % ./bin/setup
+
+Install foreman locally
+
+    % gem install foreman
 
 Run the app
 
