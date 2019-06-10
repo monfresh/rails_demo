@@ -70,3 +70,5 @@ group :test do
   gem "webdrivers"
   gem "webmock"
 end
+
+gem 'mini_racer', platforms: :ruby

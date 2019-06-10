@@ -7,6 +7,18 @@ with the necessary dependencies to run and test this app:
 
     % ./bin/setup
 
+Install foreman locally
+    % gem install foreman
+
+Run Postgres
+
+    % brew services start postgres
+
+Run the app
+
+    % foreman start -f Procfile.dev
+
+
 It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
 your machine with [this script].
 
