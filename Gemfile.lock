@@ -108,6 +108,8 @@ GEM
       colorize (~> 0.7)
       ruby_parser (>= 3.13.0)
     ffi (1.11.1)
+    figaro (1.1.1)
+      thor (~> 0.14)
     formulaic (0.4.1)
       activesupport
       capybara
@@ -116,7 +118,6 @@ GEM
       activesupport (>= 4.2.0)
     hashdiff (0.4.0)
     high_voltage (3.1.2)
-    honeybadger (4.3.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.2)
@@ -265,10 +266,6 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
-    skylight (4.1.0)
-      skylight-core (= 4.1.0)
-    skylight-core (4.1.0)
-      activesupport (>= 4.2.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-commands-rspec (1.0.4)
@@ -331,9 +328,9 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   fasterer
+  figaro
   formulaic
   high_voltage
-  honeybadger
   launchy
   listen
   neat (>= 3.0.1)
@@ -355,7 +352,6 @@ DEPENDENCIES
   shoulda-matchers
   simple_form
   simplecov
-  skylight
   spring
   spring-commands-rspec
   sprockets (>= 3.0.0)
