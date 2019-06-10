@@ -10,6 +10,7 @@ AllCops:
     - "./.simplecov"
     - "client/node_modules/**/*"
   TargetRailsVersion: 5.2
+  TargetRubyVersion: 2.6
   UseCache: true
 
 Bundler/OrderedGems:
