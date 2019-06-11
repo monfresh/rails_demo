@@ -19,6 +19,10 @@ buildpack_is_installed() {
   heroku buildpacks | grep -q "$1"
 }
 
+heroku_remote_present() {
+  git remote -v | grep -a "$1"
+}
+
 if [ $# -eq 0 ]; then
   echo >&2 "Please add your Heroku app name to the end of the command."
   echo >&2 "Usage: setup_heroku your_app_name"
@@ -65,7 +69,14 @@ heroku config:set SMTP_PASSWORD=`heroku config:get SENDGRID_PASSWORD` -a $HEROKU
 
 echo "All done setting up env vars and add-ons."
 echo "Pushing code to Heroku now. This will take a few minutes..."
-git push heroku master -a $HEROKU_APP
+if heroku_remote_present "heroku"; then
+  echo "Removing heroku remote and adding a new one for $HEROKU_APP"
+  git remote remove heroku
+else
+  echo "Adding heroku remote for $HEROKU_APP"
+  git remote add heroku "https://git.heroku.com/$HEROKU_APP.git"
+fi
+git push heroku master
 
 echo "Setting up the Heroku database"
 heroku run rails db:migrate -a $HEROKU_APP
