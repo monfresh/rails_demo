@@ -16,7 +16,7 @@ app_is_installed() {
 }
 
 buildpack_is_installed() {
-  heroku buildpacks | grep -Fqx "$1"
+  heroku buildpacks | grep -q "$1"
 }
 
 if [ $# -eq 0 ]; then
