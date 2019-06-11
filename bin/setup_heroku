@@ -38,14 +38,14 @@ if buildpack_is_installed "heroku/ruby"; then
   echo "Ruby buildpack is already installed"
 else
   echo "Setting Ruby buildpack"
-  heroku buildpacks:set heroku/ruby
+  heroku buildpacks:set heroku/ruby -a $HEROKU_APP
 fi
 
 if buildpack_is_installed "heroku/nodejs"; then
   echo "Nodejs buildpack is already installed"
 else
   echo "Adding Nodejs buildpack in first position"
-  heroku buildpacks:add --index 1 heroku/nodejs
+  heroku buildpacks:add --index 1 heroku/nodejs -a $HEROKU_APP
 fi
 
 echo "Setting environment variables frokm Figaro for $HEROKU_APP"
@@ -56,16 +56,16 @@ heroku config:set APPLICATION_HOST="$HEROKU_APP.herokuapp.com"
 
 echo "Getting ready to install add-ons for $HEROKU_APP"
 
-create_heroku_addon sendgrid:starter
+create_heroku_addon sendgrid:starter -a $HEROKU_APP
 
 echo "Setting SMTP_USERNAME"
-heroku config:set SMTP_USERNAME=`heroku config:get SENDGRID_USERNAME`
+heroku config:set SMTP_USERNAME=`heroku config:get SENDGRID_USERNAME` -a $HEROKU_APP
 echo "Setting SMTP_PASSWORD"
-heroku config:set SMTP_PASSWORD=`heroku config:get SENDGRID_PASSWORD`
+heroku config:set SMTP_PASSWORD=`heroku config:get SENDGRID_PASSWORD` -a $HEROKU_APP
 
 echo "All done setting up env vars and add-ons."
 echo "Pushing code to Heroku now. This will take a few minutes..."
-git push heroku master
+git push heroku master -a $HEROKU_APP
 
 echo "Setting up the Heroku database"
-heroku run rails db:migrate
+heroku run rails db:migrate -a $HEROKU_APP
