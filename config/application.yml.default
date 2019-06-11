@@ -18,3 +18,7 @@ RACK_TIMEOUT_SERVICE_TIMEOUT: "15"
 
 development:
   rack_mini_profiler: "off"
+
+production:
+  SMTP_ADDRESS=smtp.sendgrid.net
+  SMTP_DOMAIN=heroku.com
