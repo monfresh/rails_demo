@@ -1,0 +1,71 @@
+#!/bin/sh
+
+set -e
+
+create_heroku_addon () {
+  if heroku addons:info "$1" &> /dev/null; then
+    echo "Already installed $1"
+  else
+    echo "Installing $1"
+    heroku addons:create "$@"
+  fi
+}
+
+app_is_installed() {
+  heroku apps | grep -Fqx "$1"
+}
+
+buildpack_is_installed() {
+  heroku buildpacks | grep -Fqx "$1"
+}
+
+if [ $# -eq 0 ]; then
+  echo >&2 "Please add your Heroku app name to the end of the command."
+  echo >&2 "Usage: setup_heroku your_app_name"
+  exit 1
+fi
+
+export HEROKU_APP="$1"
+
+if app_is_installed $HEROKU_APP; then
+  echo "$HEROKU_APP is already created"
+else
+  echo "Creating Heroku app named $HEROKU_APP"
+  heroku create $HEROKU_APP
+fi
+
+if buildpack_is_installed "heroku/ruby"; then
+  echo "Ruby buildpack is already installed"
+else
+  echo "Setting Ruby buildpack"
+  heroku buildpacks:set heroku/ruby
+fi
+
+if buildpack_is_installed "heroku/nodejs"; then
+  echo "Nodejs buildpack is already installed"
+else
+  echo "Adding Nodejs buildpack in first position"
+  heroku buildpacks:add --index 1 heroku/nodejs
+fi
+
+echo "Setting environment variables frokm Figaro for $HEROKU_APP"
+figaro heroku:set -e production -a $HEROKU_APP
+
+echo "Setting APPLICATION_HOST"
+heroku config:set APPLICATION_HOST="$HEROKU_APP.herokuapp.com"
+
+echo "Getting ready to install add-ons for $HEROKU_APP"
+
+create_heroku_addon sendgrid:starter
+
+echo "Setting SMTP_USERNAME"
+heroku config:set SMTP_USERNAME=`heroku config:get SENDGRID_USERNAME`
+echo "Setting SMTP_PASSWORD"
+heroku config:set SMTP_PASSWORD=`heroku config:get SENDGRID_PASSWORD`
+
+echo "All done setting up env vars and add-ons."
+echo "Pushing code to Heroku now. This will take a few minutes..."
+git push heroku master
+
+echo "Setting up the Heroku database"
+heroku run rails db:migrate
