@@ -20,5 +20,5 @@ development:
   rack_mini_profiler: "off"
 
 production:
-  SMTP_ADDRESS=smtp.sendgrid.net
-  SMTP_DOMAIN=heroku.com
+  SMTP_ADDRESS: "smtp.sendgrid.net"
+  SMTP_DOMAIN: "heroku.com"
