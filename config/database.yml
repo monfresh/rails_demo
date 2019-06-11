@@ -1,18 +1,29 @@
-development: &default
+postgresql: &postgresql
   adapter: postgresql
-  database: demo_development
   encoding: utf8
-  min_messages: warning
+  database: demo_<%= Rails.env %>
+  port: 5432
+  username: <%= ENV['POSTGRES_USER'] %>
+  <% if ENV['POSTGRES_PASSWORD'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  <% end %>
+
+defaults: &defaults
+  host: <%= ENV['POSTGRES_HOST'] %>
   pool: <%= Integer(ENV.fetch("DB_POOL", 5)) %>
+  <<: *postgresql
+
+development:
+  <<: *defaults
+  min_messages: warning
   reaping_frequency: <%= Integer(ENV.fetch("DB_REAPING_FREQUENCY", 10)) %>
   timeout: 5000
 
 test:
-  <<: *default
-  database: demo_test
+  <<: *defaults
 
 production: &deploy
-  encoding: utf8
+  <<: *defaults
   min_messages: warning
   pool: <%= [Integer(ENV.fetch("MAX_THREADS", 5)), Integer(ENV.fetch("DB_POOL", 5))].max %>
   timeout: 5000
