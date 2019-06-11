@@ -71,4 +71,4 @@ group :test do
   gem "webmock"
 end
 
-gem 'mini_racer', platforms: :ruby
+gem "mini_racer", platforms: :ruby
