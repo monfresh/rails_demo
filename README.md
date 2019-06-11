@@ -13,19 +13,14 @@ Setup the app
 
     % ./bin/setup
 
-Install foreman locally
-
-    % gem install foreman
-
 Run the app
 
     % foreman start -f Procfile.dev
 
-
 It assumes you have a machine equipped with Ruby, Postgres, etc. If not, set up
 your machine with [this script].
 
-[this script]: https://github.com/thoughtbot/laptop
+[this script]: https://github.com/monfresh/laptop
 
 After setting up, you can run the application using [Heroku Local]:
 
