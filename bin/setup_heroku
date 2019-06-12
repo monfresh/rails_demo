@@ -20,7 +20,7 @@ buildpack_is_installed() {
 }
 
 heroku_remote_present() {
-  git remote -v | grep -q "$1"
+  git remote -v | grep -Fqx "$1"
 }
 
 if [ $# -eq 0 ]; then
