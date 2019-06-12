@@ -87,11 +87,6 @@ GEM
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     crass (1.0.4)
-    delayed_job (4.1.5)
-      activesupport (>= 3.0, < 5.3)
-    delayed_job_active_record (4.1.3)
-      activerecord (>= 3.0, < 5.3)
-      delayed_job (>= 3.0, < 5)
     diff-lcs (1.3)
     docile (1.3.1)
     dotenv (2.7.2)
@@ -345,7 +340,6 @@ DEPENDENCIES
   bummr
   bundler-audit (>= 0.5.0)
   capybara
-  delayed_job_active_record
   dotenv-rails
   factory_bot_rails
   faraday
