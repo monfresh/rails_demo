@@ -12,7 +12,6 @@ ruby "2.6.3"
 gem "autoprefixer-rails"
 gem "bootsnap", require: false
 gem "bourbon", ">= 5.0.1"
-gem "delayed_job_active_record"
 gem "faraday"
 gem "fast_jsonapi"
 gem "figaro"

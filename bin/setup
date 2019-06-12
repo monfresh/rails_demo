@@ -17,15 +17,30 @@ bundle check || bundle install
 # Install JavaScript dependencies
 bin/yarn
 
+db_exists() {
+  psql -l | grep -q "$1"
+}
+
 # Set up database and add any development seed data
 export POSTGRES_HOST=localhost
 export POSTGRES_USER=postgres
 export POSTGRES_PASSWORD=postgres
-bin/rails db:create
-bin/rails db:environment:set
-bin/rails db:reset
-bin/rails db:environment:set
-bin/rails dev:prime
+
+if db_exists demo_development; then
+  dropdb demo_development
+fi
+psql -U postgres -c "CREATE DATABASE demo_development;"
+
+if db_exists demo_test; then
+  dropdb demo_test
+fi
+psql -U postgres -c "CREATE DATABASE demo_test;"
+# bin/rails db:schema:load
+# bin/rails db:create
+# bin/rails db:environment:set
+# bin/rails db:reset
+# bin/rails db:environment:set
+# bin/rails dev:prime
 
 if [ ! -d .git/safe ] && echo $PATH | grep .git/safe > /dev/null; then
   echo "-----------------------------------------------------------------------"
